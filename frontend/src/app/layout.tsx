@@ -12,7 +12,7 @@ import "@mysten/dapp-kit/dist/index.css";
 import Providers from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Your Application Title Goes Here",
+  title: "Ramenverse",
   description: "Your application description goes here",
 };
 
