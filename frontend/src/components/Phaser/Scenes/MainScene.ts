@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { Game, Scene, Types } from "phaser";
+import { Scene } from "phaser";
+import { Cat } from "../Objects/Cat";
 
 const RAMEN_AVAILABLE_TABLE_POSITIONS = [
   {
@@ -26,36 +26,7 @@ const RAMEN_AVAILABLE_TABLE_POSITIONS = [
   },
 ];
 
-class LoadingScene extends Scene {
-  constructor() {
-    super({ key: "LoadingScene" });
-  }
-
-  preload() {
-    this.load.image("loading_bg", "/loading_bg.png");
-    this.load.image("main_floor", "/main_floor.png");
-    this.load.image("main_side_seat", "/main_side_seat.png");
-    this.load.image("main_table_seat", "/main_table_seat.png");
-    this.load.image("main_table_top", "/main_table_top.png");
-    this.load.image("main_table_front", "/main_table_front.png");
-    this.load.image("earn_button", "/main_action_buttons.png");
-    this.load.image("add_new_bowl_button", "/main_action_buttons.png");
-    this.load.image("shop_button", "/main_action_buttons.png");
-    this.load.image("ramen_lvl_2", "/main_ramen_level_2.png");
-  }
-
-  create() {
-    this.add.image(192, 293, "loading_bg");
-
-    // this.time.delayedCall(1000, () => {
-    // this.scene.start("MainScene");
-    // });
-
-    this.scene.start("MainScene");
-  }
-}
-
-class MainScene extends Scene {
+export class MainScene extends Scene {
   constructor() {
     super({ key: "MainScene" });
   }
@@ -78,6 +49,14 @@ class MainScene extends Scene {
       .setOrigin(0, 0)
       .setScale(1.1, 1.2);
     this.add.image(280, 530, "shop_button").setOrigin(0, 0);
+
+    // Spawned a Cat here for testing purposes
+    new Cat({
+      scene: this,
+      x: 0,
+      y: 0,
+      texture: "cat_yellow",
+    });
 
     const MAIN_RAMEN = this.add.image(160, 520, "ramen_lvl_2").setOrigin(0, 0);
 
@@ -168,35 +147,3 @@ class MainScene extends Scene {
     return null;
   }
 }
-
-const PhaserComponent: React.FC = () => {
-  const gameRef = useRef<Game | null>(null);
-
-  useEffect(() => {
-    const config: Types.Core.GameConfig = {
-      type: Phaser.AUTO,
-      width: 384,
-      height: 587,
-      physics: {
-        default: "arcade",
-        arcade: {
-          gravity: {
-            y: 300,
-            x: 0,
-          },
-        },
-      },
-      scene: [LoadingScene, MainScene],
-    };
-
-    gameRef.current = new Game(config);
-
-    return () => {
-      gameRef.current?.destroy(true);
-    };
-  }, []);
-
-  return <div id="game" />;
-};
-
-export default PhaserComponent;
