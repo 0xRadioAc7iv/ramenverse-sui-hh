@@ -37,7 +37,10 @@ export class MainScene extends Scene {
       texture: "cat_yellow",
     });
 
-    const MAIN_RAMEN = this.add.image(160, 520, "ramen_lvl_2").setOrigin(0, 0);
+    const MAIN_RAMEN = this.add
+      .image(160, 520, "ramen_lvl_1")
+      .setScale(1.5, 1.5)
+      .setOrigin(0, 0);
 
     MAIN_RAMEN.setInteractive();
 
@@ -93,8 +96,8 @@ export class MainScene extends Scene {
         scene: this,
         x: availablePosition.x,
         y: availablePosition.y,
-        texture: "ramen_lvl_2",
-        level: 2,
+        texture: "ramen_lvl_1",
+        level: 1,
         tablePosition: availablePosition.tablePosition,
       });
     }

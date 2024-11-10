@@ -29,6 +29,8 @@ export class LoadingScene extends Scene {
     this.load.image("ramen_lvl_7", "/main_ramen_level_7.png");
     this.load.image("ramen_lvl_8", "/main_ramen_level_8.png");
 
+    this.load.image("effect_ramen_upgrade", "/effect_ramen_upgrade.png");
+
     this.load.image("cat_gray", "/cats/cat_gray.png");
     this.load.image("cat_off_white", "/cats/cat_off_white.png");
     this.load.image("cat_white", "/cats/cat_white.png");

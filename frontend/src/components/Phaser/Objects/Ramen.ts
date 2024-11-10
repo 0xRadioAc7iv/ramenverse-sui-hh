@@ -25,6 +25,8 @@ export class Ramen extends Phaser.GameObjects.Sprite {
     this.ramenLevel = config.level;
     this.tablePosition = config.tablePosition;
 
+    if (this.ramenLevel === 1) this.setScale(1.5, 1.5);
+
     this.scene.add.existing(this);
 
     this.setOrigin(0, 0);
@@ -60,7 +62,7 @@ export class Ramen extends Phaser.GameObjects.Sprite {
           const newLevel = this.ramenLevel + 1;
 
           if (collidedRamen && this.ramenLevel === collidedRamen.ramenLevel) {
-            new Ramen({
+            const newRamen = new Ramen({
               scene: this.scene,
               x: collidedRamen.defaultPositionX,
               y: collidedRamen.defaultPositionY,
@@ -68,6 +70,7 @@ export class Ramen extends Phaser.GameObjects.Sprite {
               level: newLevel,
               tablePosition: collidedRamen.tablePosition,
             });
+            this.showUpgradeEffect(newRamen);
 
             RAMEN_AVAILABLE_TABLE_POSITIONS[this.tablePosition].available =
               true;
@@ -99,5 +102,15 @@ export class Ramen extends Phaser.GameObjects.Sprite {
       }
     }
     return null;
+  }
+
+  private showUpgradeEffect(targetRamen: Ramen) {
+    const effect = this.scene.add
+      .image(targetRamen.x, targetRamen.y, "effect_ramen_upgrade")
+      .setOrigin(0, 0);
+
+    this.scene.time.delayedCall(1200, () => {
+      effect.destroy();
+    });
   }
 }
