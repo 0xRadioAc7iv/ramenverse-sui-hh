@@ -2,29 +2,8 @@
 
 import { Scene } from "phaser";
 import { Cat } from "../Objects/Cat";
-
-const RAMEN_AVAILABLE_TABLE_POSITIONS = [
-  {
-    x: 20,
-    y: 300,
-    available: true,
-  },
-  {
-    x: 110,
-    y: 300,
-    available: true,
-  },
-  {
-    x: 200,
-    y: 300,
-    available: true,
-  },
-  {
-    x: 290,
-    y: 300,
-    available: true,
-  },
-];
+import { Ramen } from "../Objects/Ramen";
+import { RAMEN_AVAILABLE_TABLE_POSITIONS } from "@/lib/constants";
 
 export class MainScene extends Scene {
   constructor() {
@@ -65,19 +44,6 @@ export class MainScene extends Scene {
     MAIN_RAMEN.on("pointerdown", () => {
       this.spawnNewRamen();
     });
-
-    this.input.on(
-      "drag",
-      (
-        _pointer: Phaser.Input.Pointer,
-        gameObject: Phaser.GameObjects.Image,
-        dragX: number,
-        dragY: number
-      ) => {
-        gameObject.x = dragX;
-        gameObject.y = dragY;
-      }
-    );
   }
 
   create() {
@@ -123,16 +89,22 @@ export class MainScene extends Scene {
     let availablePosition = this.isPositionAvailable();
 
     if (availablePosition) {
-      const newRamen = this.add
-        .image(availablePosition.x, availablePosition.y, "ramen_lvl_2")
-        .setOrigin(0, 0);
-
-      newRamen.setInteractive();
-      this.input.setDraggable(newRamen);
+      const newRamen = new Ramen({
+        scene: this,
+        x: availablePosition.x,
+        y: availablePosition.y,
+        texture: "ramen_lvl_2",
+        level: 2,
+        tablePosition: availablePosition.tablePosition,
+      });
     }
   }
 
-  private isPositionAvailable(): { x: number; y: number } | null {
+  private isPositionAvailable(): {
+    x: number;
+    y: number;
+    tablePosition: number;
+  } | null {
     for (let i = 0; i < RAMEN_AVAILABLE_TABLE_POSITIONS.length; i++) {
       let currentRamen = RAMEN_AVAILABLE_TABLE_POSITIONS[i];
       if (currentRamen.available) {
@@ -140,6 +112,7 @@ export class MainScene extends Scene {
         return {
           x: currentRamen.x,
           y: currentRamen.y,
+          tablePosition: i,
         };
       }
     }
