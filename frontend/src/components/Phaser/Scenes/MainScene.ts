@@ -1,17 +1,25 @@
 "use client";
 
 import { Scene } from "phaser";
-import { Cat } from "../Objects/Cat";
 import { Ramen } from "../Objects/Ramen";
 import { RAMEN_AVAILABLE_TABLE_POSITIONS } from "@/lib/constants";
+import { CatManager } from "../Managers/CatManager";
 
 export class MainScene extends Scene {
+  private catManager: CatManager;
+  private currentMainRamenLevel = 1;
+
   constructor() {
     super({ key: "MainScene" });
+
+    this.catManager = new CatManager({
+      scene: this,
+      maxCats: 4,
+      spawnInterval: 3000,
+    });
   }
 
   preload() {
-    // Load your game assets here
     this.add.image(192, 293, "main_floor");
 
     this.add.image(327, 55, "main_side_seat").setOrigin(0, 0);
@@ -29,16 +37,14 @@ export class MainScene extends Scene {
       .setScale(1.1, 1.2);
     this.add.image(280, 530, "shop_button").setOrigin(0, 0);
 
-    // Spawned a Cat here for testing purposes
-    new Cat({
-      scene: this,
-      x: 0,
-      y: 0,
-      texture: "cat_yellow",
-    });
+    // Ramen bowls for Cats - Temporary
+    this.add.image(30, 55, "ramen_lvl_2").setScale(0.7, 0.7);
+    this.add.image(252, 220, "ramen_lvl_2").setScale(0.85, 0.85);
+    this.add.image(120, 220, "ramen_lvl_2").setScale(0.85, 0.85);
+    this.add.image(280, 40, "ramen_lvl_2").setScale(0.7, 0.7);
 
     const MAIN_RAMEN = this.add
-      .image(160, 520, "ramen_lvl_1")
+      .image(160, 520, `ramen_lvl_${this.currentMainRamenLevel}`)
       .setScale(1.5, 1.5)
       .setOrigin(0, 0);
 
@@ -50,6 +56,14 @@ export class MainScene extends Scene {
   }
 
   create() {
+    this.catManager = new CatManager({
+      scene: this,
+      maxCats: 4,
+      spawnInterval: 3000,
+    });
+
+    this.catManager.start();
+
     this.add.text(55, 500, "Earn", {
       color: "#86FFF8",
       strokeThickness: 0.65,
@@ -96,8 +110,8 @@ export class MainScene extends Scene {
         scene: this,
         x: availablePosition.x,
         y: availablePosition.y,
-        texture: "ramen_lvl_1",
-        level: 1,
+        texture: `ramen_lvl_${this.currentMainRamenLevel}`,
+        level: this.currentMainRamenLevel,
         tablePosition: availablePosition.tablePosition,
       });
     }
