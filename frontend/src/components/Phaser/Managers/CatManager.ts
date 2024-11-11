@@ -39,15 +39,38 @@ export class CatManager {
   spawnCat() {
     if (this.cats.length < this.maxCats) {
       const catTexture = CAT_COLORS[this.currentCatIndex];
-      const cat = new Cat({
-        scene: this.scene,
-        x: CAT_OUTSIDE_SPAWN_LOCATION.x,
-        y: CAT_OUTSIDE_SPAWN_LOCATION.y,
-        texture: catTexture,
-      });
 
-      this.cats.push(cat);
-      this.moveCat(cat);
+      if (catTexture === "cat_gray") {
+        const cat = new Cat({
+          scene: this.scene,
+          x: 400,
+          y: 120,
+          texture: catTexture,
+        });
+
+        this.cats.push(cat);
+        this.moveCat(cat);
+      } else if (catTexture === "cat_white") {
+        const cat = new Cat({
+          scene: this.scene,
+          x: -50,
+          y: 120,
+          texture: catTexture,
+        });
+
+        this.cats.push(cat);
+        this.moveCat(cat);
+      } else {
+        const cat = new Cat({
+          scene: this.scene,
+          x: CAT_OUTSIDE_SPAWN_LOCATION.x,
+          y: CAT_OUTSIDE_SPAWN_LOCATION.y,
+          texture: catTexture,
+        });
+
+        this.cats.push(cat);
+        this.moveCat(cat);
+      }
 
       // Update the index to the next cat type, looping back to the start if needed
       this.currentCatIndex = (this.currentCatIndex + 1) % CAT_COLORS.length;
@@ -62,7 +85,7 @@ export class CatManager {
       duration: 2500,
       ease: "sine.inout",
       onComplete: () => {
-        this.scene.time.delayedCall(2500, () => {
+        this.scene.time.delayedCall(6000, () => {
           this.goBackToSpawn(cat);
         });
       },

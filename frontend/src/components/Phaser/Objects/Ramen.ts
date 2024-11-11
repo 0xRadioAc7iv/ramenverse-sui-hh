@@ -109,7 +109,24 @@ export class Ramen extends Phaser.GameObjects.Sprite {
       .image(targetRamen.x, targetRamen.y, "effect_ramen_upgrade")
       .setOrigin(0, 0);
 
-    this.scene.time.delayedCall(1200, () => {
+    this.scene.tweens.add({
+      targets: effect,
+      scale: 1.5,
+      duration: 200,
+      yoyo: true,
+      ease: "Power2",
+    });
+
+    // Scale up the ramen
+    this.scene.tweens.add({
+      targets: targetRamen,
+      scale: 1.2,
+      duration: 210,
+      yoyo: true,
+      ease: "Power2",
+    });
+
+    this.scene.time.delayedCall(440, () => {
       effect.destroy();
     });
   }
