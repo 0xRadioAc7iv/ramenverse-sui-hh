@@ -13,6 +13,7 @@ export class CatManager {
   private spawnInterval: number;
   private cats: Cat[] = [];
   private spawnTimer?: Phaser.Time.TimerEvent;
+  private currentCatIndex: number = 0;
 
   constructor(config: CatManagerConfig) {
     this.scene = config.scene;
@@ -25,7 +26,7 @@ export class CatManager {
       delay: this.spawnInterval,
       callback: this.spawnCat,
       callbackScope: this,
-      loop: false,
+      loop: true,
     });
   }
 
@@ -37,16 +38,19 @@ export class CatManager {
 
   spawnCat() {
     if (this.cats.length < this.maxCats) {
+      const catTexture = CAT_COLORS[this.currentCatIndex];
       const cat = new Cat({
         scene: this.scene,
         x: CAT_OUTSIDE_SPAWN_LOCATION.x,
         y: CAT_OUTSIDE_SPAWN_LOCATION.y,
-        // texture: this.getRandomCat(),
-        texture: "cat_off_white",
+        texture: catTexture,
       });
 
       this.cats.push(cat);
       this.moveCat(cat);
+
+      // Update the index to the next cat type, looping back to the start if needed
+      this.currentCatIndex = (this.currentCatIndex + 1) % CAT_COLORS.length;
     }
   }
 
