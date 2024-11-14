@@ -1,47 +1,57 @@
 export const RAMEN_AVAILABLE_TABLE_POSITIONS = [
   {
     x: 20,
-    y: 300,
+    y: 270,
     available: true,
   },
   {
     x: 110,
-    y: 300,
+    y: 270,
     available: true,
   },
   {
     x: 200,
-    y: 300,
+    y: 270,
     available: true,
   },
   {
     x: 290,
-    y: 300,
+    y: 270,
     available: true,
   },
   {
     x: 20,
-    y: 370,
+    y: 340,
     available: true,
   },
   {
     x: 110,
-    y: 370,
+    y: 340,
     available: true,
   },
   {
     x: 200,
-    y: 370,
+    y: 340,
     available: true,
   },
   {
     x: 290,
-    y: 370,
+    y: 340,
     available: true,
   },
 ];
 
 export const CAT_OUTSIDE_SPAWN_LOCATION = { x: 100, y: -70 };
+
+export const CAT_GRAY_SPAWN_LOCATION = { x: 400, y: 120 };
+export const CAT_WHITE_SPAWN_LOCATION = { x: -100, y: 120 };
+export const CAT_OFF_WHITE_SPAWN_LOCATION = { x: 300, y: -50 };
+export const CAT_YELLOW_SPAWN_LOCATION = { x: 70, y: -50 };
+
+export const CAT_GRAY_SEAT_POSITION = { x: 212, y: 128 };
+export const CAT_WHITE_SEAT_POSITION = { x: 72, y: 136 };
+export const CAT_OFF_WHITE_SEAT_POSITION = { x: 300, y: 10 };
+export const CAT_YELLOW_SEAT_POSITION = { x: 50, y: 20 };
 
 export const CAT_RAMEN_AVAILABLE_POSITIONS = [
   { x: 30, y: 55, catColor: "cat_yellow", available: true },

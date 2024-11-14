@@ -8,6 +8,7 @@ export class LoadingScene extends Scene {
   }
 
   preload() {
+    // Loading Assets for the Loading Screen
     this.load.image("loading_bg", "/loading_background.png");
     this.load.image("loading_title", "/loading_title_2.png");
     this.load.image("loading_cloud_right", "/loading_cloud_right.png");
@@ -22,15 +23,23 @@ export class LoadingScene extends Scene {
       "/loading_ramen_right_to_left.png"
     );
 
+    // Loading Assets for the Main Screen
     this.load.image("main_floor", "/main_floor.png");
     this.load.image("main_side_seat", "/main_side_seat.png");
     this.load.image("main_table_seat", "/main_table_seat.png");
-    this.load.image("main_table_top", "/main_table_top.png");
-    this.load.image("main_table_front", "/main_table_front.png");
+    this.load.image("main_cats_table", "/main_cats_table.png");
+    this.load.image("main_ramen_table", "/main_ramen_table.png");
 
-    this.load.image("earn_button", "/main_action_buttons.png");
-    this.load.image("add_new_bowl_button", "/main_action_buttons.png");
-    this.load.image("shop_button", "/main_action_buttons.png");
+    this.load.image("add_bowl_button", "/main_add_bowl_button.png");
+
+    this.load.image(
+      "main_ramen_bowl_bg",
+      "/main_main_ramen_bowl_background.png"
+    );
+    this.load.image(
+      "main_current_gem_amount_bg",
+      "/main_current_gem_amount_background.png"
+    );
 
     this.load.image("ramen_lvl_1", "/main_ramen_level_1.png");
     this.load.image("ramen_lvl_2", "/main_ramen_level_2.png");
@@ -47,6 +56,12 @@ export class LoadingScene extends Scene {
     this.load.image("cat_off_white", "/cats/cat_off_white.png");
     this.load.image("cat_white", "/cats/cat_white.png");
     this.load.image("cat_yellow", "/cats/cat_yellow.png");
+    this.load.image("cat_small_cute_cat", "/main_cute_small_cat.png");
+
+    // Loading Common Assets
+    this.load.image("inactive_earn_button", "/common_inactive_earn_button.png");
+    this.load.image("inactive_shop_button", "/common_inactive_shop_button.png");
+    this.load.image("gem", "/common_gem.png");
   }
 
   create() {
@@ -75,7 +90,7 @@ export class LoadingScene extends Scene {
     this.tweens.add({
       targets: CLOUD_RIGHT,
       y: "+=20", // move up and down by 10 pixels
-      duration: 2000, // 2 seconds for a complete up and down motion
+      duration: 1200, // 2 seconds for a complete up and down motion
       ease: "Sine.easeInOut", // smooth easing for floating effect
       repeat: -1, // repeat forever
       yoyo: true, // move back and forth
@@ -84,7 +99,7 @@ export class LoadingScene extends Scene {
     this.tweens.add({
       targets: CLOUD_LEFT,
       y: "-=20", // move up and down by 10 pixels
-      duration: 2000, // 2 seconds for a complete up and down motion
+      duration: 1200, // 2 seconds for a complete up and down motion
       ease: "Sine.easeInOut", // smooth easing for floating effect
       repeat: -1, // repeat forever
       yoyo: true, // move back and forth
@@ -108,8 +123,10 @@ export class LoadingScene extends Scene {
       ease: "Linear",
     });
 
-    this.time.delayedCall(4000, () => {
-      this.scene.start("MainScene");
-    });
+    this.scene.start("MainScene");
+
+    // this.time.delayedCall(4000, () => {
+    // this.scene.start("MainScene");
+    // });
   }
 }

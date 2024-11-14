@@ -25,8 +25,7 @@ export class Ramen extends Phaser.GameObjects.Sprite {
     this.ramenLevel = config.level;
     this.tablePosition = config.tablePosition;
 
-    if (this.ramenLevel === 1) this.setScale(1.5, 1.5);
-
+    this.setScale(0.5, 0.5);
     this.scene.add.existing(this);
 
     this.setOrigin(0, 0);
@@ -120,8 +119,8 @@ export class Ramen extends Phaser.GameObjects.Sprite {
     // Scale up the ramen
     this.scene.tweens.add({
       targets: targetRamen,
-      scale: 1.2,
-      duration: 210,
+      scale: 0.7,
+      duration: 200,
       yoyo: true,
       ease: "Power2",
     });

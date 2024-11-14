@@ -20,33 +20,67 @@ export class MainScene extends Scene {
   }
 
   preload() {
-    this.add.image(192, 293, "main_floor");
+    this.add.image(192, 293, "main_floor").setScale(0.5, 0.5);
 
-    this.add.image(327, 55, "main_side_seat").setOrigin(0, 0);
+    this.add.image(190, 25, "main_current_gem_amount_bg").setScale(0.6, 0.5);
+    this.add.image(230, 23, "gem").setScale(0.5, 0.5);
 
+    this.add
+      .image(327, 55, "main_side_seat")
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
+    this.add
+      .image(300, 100, "cat_small_cute_cat")
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
     this.add.image(82, 165, "main_table_seat").setOrigin(0, 0);
     this.add.image(212, 165, "main_table_seat").setOrigin(0, 0);
 
-    this.add.image(0, 194, "main_table_top").setOrigin(0, 0);
-    this.add.image(0, 330, "main_table_front").setOrigin(0, 0);
-
-    this.add.image(40, 530, "earn_button").setOrigin(0, 0);
     this.add
-      .image(160, 520, "add_new_bowl_button")
+      .image(-10, 194, "main_cats_table")
       .setOrigin(0, 0)
-      .setScale(1.1, 1.2);
-    this.add.image(280, 530, "shop_button").setOrigin(0, 0);
+      .setScale(0.5, 0.5);
+    this.add
+      .image(0, 260, "main_ramen_table")
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
+
+    this.add
+      .image(160, 460, "main_ramen_bowl_bg")
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
+    this.add
+      .image(25, 554, "inactive_earn_button")
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
+    this.add
+      .image(130, 544, "add_bowl_button")
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
+    this.add
+      .image(280, 554, "inactive_shop_button")
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
 
     // Ramen bowls for Cats - Temporary
-    this.add.image(30, 55, "ramen_lvl_2").setScale(0.7, 0.7);
-    this.add.image(252, 220, "ramen_lvl_2").setScale(0.85, 0.85);
-    this.add.image(120, 220, "ramen_lvl_2").setScale(0.85, 0.85);
-    this.add.image(280, 40, "ramen_lvl_2").setScale(0.7, 0.7);
+    this.add.image(30, 55, "ramen_lvl_2").setScale(0.7, 0.7).setScale(0.4, 0.4);
+    this.add
+      .image(252, 220, "ramen_lvl_2")
+      .setScale(0.85, 0.85)
+      .setScale(0.4, 0.4);
+    this.add
+      .image(120, 216, "ramen_lvl_2")
+      .setScale(0.85, 0.85)
+      .setScale(0.4, 0.4);
+    this.add
+      .image(280, 40, "ramen_lvl_2")
+      .setScale(0.7, 0.7)
+      .setScale(0.4, 0.4);
 
     const MAIN_RAMEN = this.add
-      .image(160, 520, `ramen_lvl_${this.currentMainRamenLevel}`)
-      .setScale(1.5, 1.5)
-      .setOrigin(0, 0);
+      .image(162, 462, `ramen_lvl_${this.currentMainRamenLevel}`)
+      .setOrigin(0, 0)
+      .setScale(0.5, 0.5);
 
     MAIN_RAMEN.setInteractive();
 
@@ -63,43 +97,6 @@ export class MainScene extends Scene {
     });
 
     this.catManager.start();
-
-    this.add.text(55, 500, "Earn", {
-      color: "#86FFF8",
-      strokeThickness: 0.65,
-      resolution: 2,
-      shadow: {
-        offsetX: 2,
-        offsetY: 2,
-        color: "#000000",
-        stroke: true,
-        fill: true,
-      },
-    });
-    this.add.text(160, 490, "Add Bowl", {
-      color: "#86FFF8",
-      strokeThickness: 0.65,
-      resolution: 2,
-      shadow: {
-        offsetX: 2,
-        offsetY: 2,
-        color: "#000000",
-        stroke: true,
-        fill: true,
-      },
-    });
-    this.add.text(295, 500, "Shop", {
-      color: "#86FFF8",
-      strokeThickness: 0.65,
-      resolution: 2,
-      shadow: {
-        offsetX: 2,
-        offsetY: 2,
-        color: "#000000",
-        stroke: true,
-        fill: true,
-      },
-    });
   }
 
   private spawnNewRamen(): void {
@@ -114,6 +111,8 @@ export class MainScene extends Scene {
         level: this.currentMainRamenLevel,
         tablePosition: availablePosition.tablePosition,
       });
+
+      newRamen.setScale(0.5, 0.5);
     }
   }
 

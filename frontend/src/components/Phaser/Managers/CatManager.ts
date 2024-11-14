@@ -1,4 +1,11 @@
-import { CAT_COLORS, CAT_OUTSIDE_SPAWN_LOCATION } from "@/lib/constants";
+import {
+  CAT_COLORS,
+  CAT_GRAY_SPAWN_LOCATION,
+  CAT_OFF_WHITE_SPAWN_LOCATION,
+  CAT_OUTSIDE_SPAWN_LOCATION,
+  CAT_WHITE_SPAWN_LOCATION,
+  CAT_YELLOW_SPAWN_LOCATION,
+} from "@/lib/constants";
 import { Cat } from "../Objects/Cat";
 
 interface CatManagerConfig {
@@ -43,8 +50,8 @@ export class CatManager {
       if (catTexture === "cat_gray") {
         const cat = new Cat({
           scene: this.scene,
-          x: 400,
-          y: 120,
+          x: CAT_GRAY_SPAWN_LOCATION.x,
+          y: CAT_GRAY_SPAWN_LOCATION.y,
           texture: catTexture,
         });
 
@@ -53,8 +60,18 @@ export class CatManager {
       } else if (catTexture === "cat_white") {
         const cat = new Cat({
           scene: this.scene,
-          x: -50,
-          y: 120,
+          x: CAT_WHITE_SPAWN_LOCATION.x,
+          y: CAT_WHITE_SPAWN_LOCATION.y,
+          texture: catTexture,
+        });
+
+        this.cats.push(cat);
+        this.moveCat(cat);
+      } else if (catTexture === "cat_off_white") {
+        const cat = new Cat({
+          scene: this.scene,
+          x: CAT_OFF_WHITE_SPAWN_LOCATION.x,
+          y: CAT_OFF_WHITE_SPAWN_LOCATION.y,
           texture: catTexture,
         });
 
@@ -63,8 +80,8 @@ export class CatManager {
       } else {
         const cat = new Cat({
           scene: this.scene,
-          x: CAT_OUTSIDE_SPAWN_LOCATION.x,
-          y: CAT_OUTSIDE_SPAWN_LOCATION.y,
+          x: CAT_YELLOW_SPAWN_LOCATION.x,
+          y: CAT_YELLOW_SPAWN_LOCATION.y,
           texture: catTexture,
         });
 
@@ -80,8 +97,8 @@ export class CatManager {
   moveCat(cat: Cat) {
     this.scene.tweens.add({
       targets: cat,
-      x: cat.seatPositionX,
-      y: cat.seatPositionY,
+      x: cat.seatPosition.x,
+      y: cat.seatPosition.y,
       duration: 2500,
       ease: "sine.inout",
       onComplete: () => {
@@ -100,8 +117,8 @@ export class CatManager {
   goBackToSpawn(cat: Cat) {
     this.scene.tweens.add({
       targets: cat,
-      x: CAT_OUTSIDE_SPAWN_LOCATION.x,
-      y: CAT_OUTSIDE_SPAWN_LOCATION.y,
+      x: cat.spawnLocation.x,
+      y: cat.spawnLocation.y,
       duration: 2500,
       ease: "sine.inout",
       onComplete: () => {
