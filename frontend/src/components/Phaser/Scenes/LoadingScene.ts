@@ -8,7 +8,19 @@ export class LoadingScene extends Scene {
   }
 
   preload() {
-    this.load.image("loading_bg", "/loading_bg.png");
+    this.load.image("loading_bg", "/loading_background.png");
+    this.load.image("loading_title", "/loading_title_2.png");
+    this.load.image("loading_cloud_right", "/loading_cloud_right.png");
+    this.load.image("loading_cloud_left", "/loading_cloud_left.png");
+    this.load.image("loading_loading_button", "/loading_loading_button.png");
+    this.load.image(
+      "loading_ramen_left_to_right",
+      "/loading_ramen_left_to_right.png"
+    );
+    this.load.image(
+      "loading_ramen_right_to_left",
+      "/loading_ramen_right_to_left.png"
+    );
 
     this.load.image("main_floor", "/main_floor.png");
     this.load.image("main_side_seat", "/main_side_seat.png");
@@ -38,12 +50,66 @@ export class LoadingScene extends Scene {
   }
 
   create() {
-    this.add.image(192, 293, "loading_bg");
+    this.add.image(192, 293, "loading_bg").setScale(0.5, 0.5);
 
-    // this.time.delayedCall(1000, () => {
-    // this.scene.start("MainScene");
-    // });
+    const CLOUD_RIGHT = this.add
+      .image(375, 42, "loading_cloud_right")
+      .setScale(0.5, 0.5);
 
-    this.scene.start("MainScene");
+    this.add.image(192, 100, "loading_title").setScale(0.5, 0.5);
+
+    const CLOUD_LEFT = this.add
+      .image(100, 160, "loading_cloud_left")
+      .setScale(0.5, 0.5);
+
+    this.add.image(192, 530, "loading_loading_button").setScale(0.5, 0.5);
+
+    const RAMEN_LEFT_TO_RIGHT = this.add
+      .image(-50, 360, "loading_ramen_left_to_right")
+      .setScale(0.45, 0.45);
+
+    const RAMEN_RIGHT_TO_LEFT = this.add
+      .image(450, 240, "loading_ramen_right_to_left")
+      .setScale(0.45, 0.45);
+
+    this.tweens.add({
+      targets: CLOUD_RIGHT,
+      y: "+=20", // move up and down by 10 pixels
+      duration: 2000, // 2 seconds for a complete up and down motion
+      ease: "Sine.easeInOut", // smooth easing for floating effect
+      repeat: -1, // repeat forever
+      yoyo: true, // move back and forth
+    });
+
+    this.tweens.add({
+      targets: CLOUD_LEFT,
+      y: "-=20", // move up and down by 10 pixels
+      duration: 2000, // 2 seconds for a complete up and down motion
+      ease: "Sine.easeInOut", // smooth easing for floating effect
+      repeat: -1, // repeat forever
+      yoyo: true, // move back and forth
+    });
+
+    // Moves Ramens from Left to Right
+    this.tweens.add({
+      targets: RAMEN_LEFT_TO_RIGHT,
+      x: 300,
+      y: 400,
+      duration: 5000,
+      ease: "Linear",
+    });
+
+    // Moves Ramens from Right to Left
+    this.tweens.add({
+      targets: RAMEN_RIGHT_TO_LEFT,
+      x: 100,
+      y: 300,
+      duration: 5000,
+      ease: "Linear",
+    });
+
+    this.time.delayedCall(4000, () => {
+      this.scene.start("MainScene");
+    });
   }
 }
