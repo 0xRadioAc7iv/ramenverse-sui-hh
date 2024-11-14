@@ -64,11 +64,12 @@ export class LoadingScene extends Scene {
     this.load.image("shop_theme_yellow", "/shop_theme_yellow.png");
     this.load.image("shop_theme_red", "/shop_theme_red.png");
 
-    // Loading Assets for the Earn Screen
+    // Loading Assets for the Earn/Stake Screen
     this.load.image("earn_title", "/earn_title.png");
     this.load.image("active_earn_button", "/earn_active_earn_button.png");
     this.load.image("earn_protocol_1", "/earn_protocol_1.png");
     this.load.image("earn_protocol_2", "/earn_protocol_2.png");
+    this.load.image("staking_button", "/stake_staking_button.png");
 
     // Loading Common Assets
     this.load.image("inactive_earn_button", "/common_inactive_earn_button.png");

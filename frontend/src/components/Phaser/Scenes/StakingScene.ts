@@ -1,8 +1,8 @@
 import { Scene } from "phaser";
 
-export class EarnScene extends Scene {
+export class StakingScene extends Scene {
   constructor() {
-    super({ key: "EarnScene" });
+    super({ key: "StakingScene" });
   }
 
   preload() {}
@@ -15,15 +15,7 @@ export class EarnScene extends Scene {
     this.add.image(190, 25, "main_current_gem_amount_bg").setScale(0.6, 0.5);
     this.add.image(230, 23, "gem").setScale(0.5, 0.5);
 
-    const PROTOCOL_BUTTON_1 = this.add
-      .image(192, 200, "earn_protocol_1")
-      .setScale(0.5, 0.5);
-    this.add.image(192, 380, "earn_protocol_2").setScale(0.5, 0.5);
-
-    PROTOCOL_BUTTON_1.setInteractive().on("pointerdown", () => {
-      this.scene.launch("StakingScene");
-      this.scene.bringToTop("StakingScene");
-    });
+    this.add.image(192, 220, "staking_button").setScale(0.5, 0.5);
 
     this.add
       .image(25, 544, "active_earn_button")
@@ -36,7 +28,7 @@ export class EarnScene extends Scene {
       .setScale(0.5, 0.5);
 
     PLAY_BUTTON.setInteractive().on("pointerdown", () => {
-      this.scene.stop("EarnScene");
+      this.scene.stop("StakingScene");
       this.scene.bringToTop("MainScene");
     });
 

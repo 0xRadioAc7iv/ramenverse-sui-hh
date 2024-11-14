@@ -7,6 +7,7 @@ import { LoadingScene } from "./Scenes/LoadingScene";
 import { MainScene } from "./Scenes/MainScene";
 import { ShopScene } from "./Scenes/ShopScene";
 import { EarnScene } from "./Scenes/EarnScene";
+import { StakingScene } from "./Scenes/StakingScene";
 
 const PhaserComponent: React.FC = () => {
   const gameRef = useRef<Game | null>(null);
@@ -25,7 +26,7 @@ const PhaserComponent: React.FC = () => {
           },
         },
       },
-      scene: [LoadingScene, MainScene, ShopScene, EarnScene],
+      scene: [LoadingScene, MainScene, ShopScene, EarnScene, StakingScene],
     };
 
     gameRef.current = new Game(config);
