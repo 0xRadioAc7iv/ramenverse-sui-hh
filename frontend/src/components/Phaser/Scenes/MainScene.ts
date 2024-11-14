@@ -19,7 +19,11 @@ export class MainScene extends Scene {
     });
   }
 
-  preload() {
+  preload() {}
+
+  create() {
+    this.catManager.start();
+
     this.add.image(192, 293, "main_floor").setScale(0.5, 0.5);
 
     this.add.image(190, 25, "main_current_gem_amount_bg").setScale(0.6, 0.5);
@@ -49,18 +53,31 @@ export class MainScene extends Scene {
       .image(160, 460, "main_ramen_bowl_bg")
       .setOrigin(0, 0)
       .setScale(0.5, 0.5);
-    this.add
+
+    const EARN_BUTTON = this.add
       .image(25, 554, "inactive_earn_button")
       .setOrigin(0, 0)
       .setScale(0.5, 0.5);
+
+    EARN_BUTTON.setInteractive().on("pointerdown", () => {
+      this.scene.launch("EarnScene");
+      this.scene.bringToTop("EarnScene");
+    });
+
     this.add
       .image(130, 544, "add_bowl_button")
       .setOrigin(0, 0)
       .setScale(0.5, 0.5);
-    this.add
+
+    const SHOP_BUTTON = this.add
       .image(280, 554, "inactive_shop_button")
       .setOrigin(0, 0)
       .setScale(0.5, 0.5);
+
+    SHOP_BUTTON.setInteractive().on("pointerdown", () => {
+      this.scene.launch("ShopScene");
+      this.scene.bringToTop("ShopScene");
+    });
 
     // Ramen bowls for Cats - Temporary
     this.add.image(30, 55, "ramen_lvl_2").setScale(0.7, 0.7).setScale(0.4, 0.4);
@@ -87,16 +104,6 @@ export class MainScene extends Scene {
     MAIN_RAMEN.on("pointerdown", () => {
       this.spawnNewRamen();
     });
-  }
-
-  create() {
-    this.catManager = new CatManager({
-      scene: this,
-      maxCats: 4,
-      spawnInterval: 3000,
-    });
-
-    this.catManager.start();
   }
 
   private spawnNewRamen(): void {

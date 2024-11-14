@@ -58,9 +58,22 @@ export class LoadingScene extends Scene {
     this.load.image("cat_yellow", "/cats/cat_yellow.png");
     this.load.image("cat_small_cute_cat", "/main_cute_small_cat.png");
 
+    // Loading Assets for the Shop Screen
+    this.load.image("shop_title", "/shop_title.png");
+    this.load.image("active_shop_button", "/shop_active_shop_button.png");
+    this.load.image("shop_theme_yellow", "/shop_theme_yellow.png");
+    this.load.image("shop_theme_red", "/shop_theme_red.png");
+
+    // Loading Assets for the Earn Screen
+    this.load.image("earn_title", "/earn_title.png");
+    this.load.image("active_earn_button", "/earn_active_earn_button.png");
+    this.load.image("earn_protocol_1", "/earn_protocol_1.png");
+    this.load.image("earn_protocol_2", "/earn_protocol_2.png");
+
     // Loading Common Assets
     this.load.image("inactive_earn_button", "/common_inactive_earn_button.png");
     this.load.image("inactive_shop_button", "/common_inactive_shop_button.png");
+    this.load.image("play_button", "/common_play_button.png");
     this.load.image("gem", "/common_gem.png");
   }
 
@@ -89,20 +102,20 @@ export class LoadingScene extends Scene {
 
     this.tweens.add({
       targets: CLOUD_RIGHT,
-      y: "+=20", // move up and down by 10 pixels
-      duration: 1200, // 2 seconds for a complete up and down motion
-      ease: "Sine.easeInOut", // smooth easing for floating effect
-      repeat: -1, // repeat forever
-      yoyo: true, // move back and forth
+      y: "+=20",
+      duration: 1200,
+      ease: "Sine.easeInOut",
+      repeat: -1,
+      yoyo: true,
     });
 
     this.tweens.add({
       targets: CLOUD_LEFT,
-      y: "-=20", // move up and down by 10 pixels
-      duration: 1200, // 2 seconds for a complete up and down motion
-      ease: "Sine.easeInOut", // smooth easing for floating effect
-      repeat: -1, // repeat forever
-      yoyo: true, // move back and forth
+      y: "-=20",
+      duration: 1200,
+      ease: "Sine.easeInOut",
+      repeat: -1,
+      yoyo: true,
     });
 
     // Moves Ramens from Left to Right
@@ -123,10 +136,10 @@ export class LoadingScene extends Scene {
       ease: "Linear",
     });
 
-    this.scene.start("MainScene");
-
-    // this.time.delayedCall(4000, () => {
     // this.scene.start("MainScene");
-    // });
+
+    this.time.delayedCall(4000, () => {
+      this.scene.start("MainScene");
+    });
   }
 }
