@@ -8,6 +8,7 @@ import { CatManager } from "../Managers/CatManager";
 export class MainScene extends Scene {
   private catManager: CatManager;
   private currentMainRamenLevel = 1;
+  private gemsText!: Phaser.GameObjects.Text;
 
   constructor() {
     super({ key: "MainScene" });
@@ -24,10 +25,20 @@ export class MainScene extends Scene {
   create() {
     this.catManager.start();
 
+    const gems_amount = this.registry.get("gems");
+
     this.add.image(192, 293, "main_floor").setScale(0.5, 0.5);
 
     this.add.image(190, 25, "main_current_gem_amount_bg").setScale(0.6, 0.5);
     this.add.image(230, 23, "gem").setScale(0.5, 0.5);
+
+    this.gemsText = this.add.text(134, 10, gems_amount, {
+      fontSize: "26px",
+      color: "#000",
+      stroke: "#fff",
+      strokeThickness: 1,
+      resolution: 2,
+    });
 
     this.add
       .image(327, 55, "main_side_seat")
@@ -80,17 +91,17 @@ export class MainScene extends Scene {
     });
 
     // Ramen bowls for Cats - Temporary
-    this.add.image(30, 55, "ramen_lvl_2").setScale(0.7, 0.7).setScale(0.4, 0.4);
+    this.add.image(30, 55, "ramen_lvl_4").setScale(0.7, 0.7).setScale(0.4, 0.4);
     this.add
-      .image(252, 220, "ramen_lvl_2")
+      .image(252, 220, "ramen_lvl_5")
       .setScale(0.85, 0.85)
       .setScale(0.4, 0.4);
     this.add
-      .image(120, 216, "ramen_lvl_2")
+      .image(120, 216, "ramen_lvl_3")
       .setScale(0.85, 0.85)
       .setScale(0.4, 0.4);
     this.add
-      .image(280, 40, "ramen_lvl_2")
+      .image(280, 40, "ramen_lvl_6")
       .setScale(0.7, 0.7)
       .setScale(0.4, 0.4);
 
@@ -102,6 +113,11 @@ export class MainScene extends Scene {
     MAIN_RAMEN.setInteractive();
 
     MAIN_RAMEN.on("pointerdown", () => {
+      const gems = this.registry.get("gems");
+      this.registry.set("gems", gems - 100);
+
+      this.updateGemsText();
+
       this.spawnNewRamen();
     });
   }
@@ -141,5 +157,10 @@ export class MainScene extends Scene {
     }
 
     return null;
+  }
+
+  private updateGemsText() {
+    const currentGems = this.registry.get("gems");
+    this.gemsText.setText(currentGems);
   }
 }

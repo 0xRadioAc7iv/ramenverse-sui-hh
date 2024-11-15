@@ -58,6 +58,35 @@ export class LoadingScene extends Scene {
     this.load.image("cat_yellow", "/cats/cat_yellow.png");
     this.load.image("cat_small_cute_cat", "/main_cute_small_cat.png");
 
+    this.load.image(
+      "ramen_upgrade_modal_lvl_2",
+      "/main_ramen_upgrade_modal_lvl_2.png"
+    );
+    this.load.image(
+      "ramen_upgrade_modal_lvl_3",
+      "/main_ramen_upgrade_modal_lvl_3.png"
+    );
+    this.load.image(
+      "ramen_upgrade_modal_lvl_4",
+      "/main_ramen_upgrade_modal_lvl_4.png"
+    );
+    this.load.image(
+      "ramen_upgrade_modal_lvl_5",
+      "/main_ramen_upgrade_modal_lvl_5.png"
+    );
+    this.load.image(
+      "ramen_upgrade_modal_lvl_6",
+      "/main_ramen_upgrade_modal_lvl_6.png"
+    );
+    this.load.image(
+      "ramen_upgrade_modal_lvl_7",
+      "/main_ramen_upgrade_modal_lvl_7.png"
+    );
+    this.load.image(
+      "ramen_upgrade_modal_lvl_8",
+      "/main_ramen_upgrade_modal_lvl_8.png"
+    );
+
     // Loading Assets for the Shop Screen
     this.load.image("shop_title", "/shop_title.png");
     this.load.image("active_shop_button", "/shop_active_shop_button.png");
@@ -76,6 +105,11 @@ export class LoadingScene extends Scene {
     this.load.image("inactive_shop_button", "/common_inactive_shop_button.png");
     this.load.image("play_button", "/common_play_button.png");
     this.load.image("gem", "/common_gem.png");
+
+    // Global Variables
+    this.registry.set("currentMainRamenLevel", 1);
+    this.registry.set("maxRamenLevelReached", 1);
+    this.registry.set("gems", 10000);
   }
 
   create() {
@@ -137,10 +171,10 @@ export class LoadingScene extends Scene {
       ease: "Linear",
     });
 
-    // this.scene.start("MainScene");
+    this.scene.start("MainScene");
 
-    this.time.delayedCall(4000, () => {
-      this.scene.start("MainScene");
-    });
+    // this.time.delayedCall(4000, () => {
+    //   this.scene.start("MainScene");
+    // });
   }
 }

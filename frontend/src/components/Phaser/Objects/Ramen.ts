@@ -76,6 +76,25 @@ export class Ramen extends Phaser.GameObjects.Sprite {
 
             this.destroy();
             collidedRamen.destroy();
+
+            // const maxLevelReached = this.scene.registry.get(
+            //   "maxRamenLevelReached"
+            // );
+            // const currentMainRamenLevel = this.scene.registry.get(
+            //   "currentMainRamenLevel"
+            // );
+
+            // if (newLevel > maxLevelReached) {
+            //   // this.showLevelUpModal(newLevel);
+            //   this.scene.registry.set(
+            //     "maxRamenLevelReached",
+            //     maxLevelReached + 1
+            //   );
+            //   this.scene.registry.set(
+            //     "currentMainRamenLevel",
+            //     currentMainRamenLevel + 1
+            //   );
+            // }
           } else {
             this.x = this.defaultPositionX;
             this.y = this.defaultPositionY;
@@ -129,4 +148,15 @@ export class Ramen extends Phaser.GameObjects.Sprite {
       effect.destroy();
     });
   }
+
+  // private showLevelUpModal(newLevel: number) {
+  //   const levelUpModal = this.scene.add
+  //     .image(192, 293, `ramen_upgrade_modal_lvl_${newLevel}`)
+  //     .setScale(0.5)
+  //     .setDepth(10);
+
+  //   this.scene.time.delayedCall(1500, () => {
+  //     levelUpModal.destroy();
+  //   });
+  // }
 }

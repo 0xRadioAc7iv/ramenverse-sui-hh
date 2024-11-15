@@ -21,6 +21,7 @@ export class CatManager {
   private cats: Cat[] = [];
   private spawnTimer?: Phaser.Time.TimerEvent;
   private currentCatIndex: number = 0;
+  private gemsText!: Phaser.GameObjects.Text;
 
   constructor(config: CatManagerConfig) {
     this.scene = config.scene;
@@ -34,6 +35,15 @@ export class CatManager {
       callback: this.spawnCat,
       callbackScope: this,
       loop: true,
+    });
+
+    const gems_amount = this.scene.registry.get("gems");
+    this.gemsText = this.scene.add.text(134, 10, gems_amount, {
+      fontSize: "26px",
+      color: "#000",
+      stroke: "#fff",
+      strokeThickness: 1,
+      resolution: 2,
     });
   }
 
@@ -95,6 +105,8 @@ export class CatManager {
   }
 
   moveCat(cat: Cat) {
+    const currentGems = this.scene.registry.get("gems");
+
     this.scene.tweens.add({
       targets: cat,
       x: cat.seatPosition.x,
@@ -103,6 +115,11 @@ export class CatManager {
       ease: "sine.inout",
       onComplete: () => {
         this.scene.time.delayedCall(6000, () => {
+          const newGems = currentGems + 500;
+          this.scene.registry.set("gems", newGems);
+
+          // this.updateGemsText();
+
           this.goBackToSpawn(cat);
         });
       },
@@ -127,8 +144,8 @@ export class CatManager {
     });
   }
 
-  private getRandomCat() {
-    const randomIndex = Phaser.Math.Between(0, CAT_COLORS.length - 1);
-    return CAT_COLORS[randomIndex];
-  }
+  // private updateGemsText() {
+  //   const currentGems = this.scene.registry.get("gems");
+  //   this.gemsText.setText(currentGems);
+  // }
 }
