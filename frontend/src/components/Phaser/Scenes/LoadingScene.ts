@@ -171,10 +171,10 @@ export class LoadingScene extends Scene {
       ease: "Linear",
     });
 
-    this.scene.start("MainScene");
+    // this.scene.start("MainScene");
 
-    // this.time.delayedCall(4000, () => {
-    //   this.scene.start("MainScene");
-    // });
+    this.time.delayedCall(4000, () => {
+      this.scene.start("MainScene");
+    });
   }
 }
