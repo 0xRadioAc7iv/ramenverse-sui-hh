@@ -1,6 +1,8 @@
 import { Scene } from "phaser";
 
 export class EarnScene extends Scene {
+  private gemsText!: Phaser.GameObjects.Text;
+
   constructor() {
     super({ key: "EarnScene" });
   }
@@ -8,12 +10,22 @@ export class EarnScene extends Scene {
   preload() {}
 
   create() {
+    const gems_amount = this.registry.get("gems");
+
     this.add.image(192, 293, "main_floor").setScale(0.5, 0.5);
 
     this.add.image(75, 80, "earn_title").setScale(0.6, 0.6);
 
     this.add.image(190, 25, "main_current_gem_amount_bg").setScale(0.6, 0.5);
     this.add.image(230, 23, "gem").setScale(0.5, 0.5);
+
+    this.gemsText = this.add.text(134, 10, gems_amount, {
+      fontSize: "26px",
+      color: "#000",
+      stroke: "#fff",
+      strokeThickness: 1,
+      resolution: 2,
+    });
 
     const PROTOCOL_BUTTON_1 = this.add
       .image(192, 200, "earn_protocol_1")
