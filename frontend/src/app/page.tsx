@@ -1,16 +1,12 @@
 "use client";
 
 import { Page } from "@/components/Page";
-import dynamic from "next/dynamic";
-
-const Game = dynamic(() => import("../components/Phaser/PhaserComponent"), {
-  ssr: false,
-});
+import { ConnectButton } from "@mysten/dapp-kit";
 
 export default function Home() {
   return (
     <Page back={false}>
-      <Game />
+      <ConnectButton />
     </Page>
   );
 }
